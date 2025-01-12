@@ -4,10 +4,10 @@
 // Constants
 #define MAX_COUNT 100
 
-// Global array to store precomputed FizzBuzz results
+// Global array to store precomputed SkidBuzz results
 static char skidbuzz_results[MAX_COUNT][32];
 
-// Precompute FizzBuzz results during setup
+// Precompute SkidBuzz results during setup
 void precompute_skidbuzz() {
     for(int i = 1; i <= MAX_COUNT; i++) {
         if(i % 15 == 0) {
@@ -23,19 +23,19 @@ void precompute_skidbuzz() {
 }
 
 // Callback function to display the current result
-void skidbuzz_callback(Canvas* canvas, void* ctx);
+void skidbuzz_callback(Canvas* canvas, void* ctx) {
     (void)ctx; // Mark ctx as unused
-    static int index = 0;
+    static int current_index = 0;
 
     // Clear the canvas
     canvas_clear(canvas);
 
-    // Draw the precomputed FizzBuzz result for the current index
+    // Draw the precomputed SkidBuzz result for the current index
     canvas_set_font(canvas, FontPrimary);
-    canvas_draw_str(canvas, 10, 30, fizzbuzz_results[index]);
+    canvas_draw_str(canvas, 10, 30, skidbuzz_results[current_index]);
 
     // Increment the index, looping back to 0 after reaching MAX_COUNT
-    index = (index + 1) % MAX_COUNT;
+    current_index = (current_index + 1) % MAX_COUNT;
 }
 
 int32_t skidbuzz_main(void* p) {
@@ -49,7 +49,7 @@ int32_t skidbuzz_main(void* p) {
     ViewPort* viewport = view_port_alloc();
 
     // Assign the callback for the viewport
-    view_port_draw_callback_set(viewport, fizzbuzz_callback, NULL);
+    view_port_draw_callback_set(viewport, skidbuzz_callback, NULL);
 
     // Add the viewport to the GUI
     gui_add_view_port(gui, viewport, GuiLayerFullscreen);
