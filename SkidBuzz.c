@@ -5,25 +5,25 @@
 #define MAX_COUNT 100
 
 // Global array to store precomputed FizzBuzz results
-static char fizzbuzz_results[MAX_COUNT][32];
+static char skidbuzz_results[MAX_COUNT][32];
 
 // Precompute FizzBuzz results during setup
-void precompute_fizzbuzz() {
+void precompute_skidbuzz() {
     for(int i = 1; i <= MAX_COUNT; i++) {
         if(i % 15 == 0) {
-            snprintf(fizzbuzz_results[i - 1], sizeof(fizzbuzz_results[i - 1]), "%d: FizzBuzz", i);
+            snprintf(skidbuzz_results[i - 1], sizeof(skidbuzz_results[i - 1]), "%d: SkidBuzz", i);
         } else if(i % 5 == 0) {
-            snprintf(fizzbuzz_results[i - 1], sizeof(fizzbuzz_results[i - 1]), "%d: Fizz", i);
+            snprintf(skidbuzz_results[i - 1], sizeof(skidbuzz_results[i - 1]), "%d: Skid", i);
         } else if(i % 3 == 0) {
-            snprintf(fizzbuzz_results[i - 1], sizeof(fizzbuzz_results[i - 1]), "%d: Buzz", i);
+            snprintf(skidbuzz_results[i - 1], sizeof(skidbuzz_results[i - 1]), "%d: Buzz", i);
         } else {
-            snprintf(fizzbuzz_results[i - 1], sizeof(fizzbuzz_results[i - 1]), "%d", i);
+            snprintf(skidbuzz_results[i - 1], sizeof(skidbuzz_results[i - 1]), "%d", i);
         }
     }
 }
 
 // Callback function to display the current result
-void fizzbuzz_callback(Canvas* canvas, void* ctx) {
+void skidbuzz_callback(Canvas* canvas, void* ctx);
     (void)ctx; // Mark ctx as unused
     static int index = 0;
 
@@ -38,11 +38,11 @@ void fizzbuzz_callback(Canvas* canvas, void* ctx) {
     index = (index + 1) % MAX_COUNT;
 }
 
-int32_t fizzbuzz_main(void* p) {
+int32_t skidbuzz_main(void* p) {
     (void)p; // Mark p as unused
 
-    // Precompute FizzBuzz results
-    precompute_fizzbuzz();
+    // Precompute SkidBuzz results
+    precompute_skidbuzz();
 
     // Set up GUI and viewport
     Gui* gui = furi_record_open(RECORD_GUI);
