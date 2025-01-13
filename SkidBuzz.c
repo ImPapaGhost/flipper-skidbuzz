@@ -47,8 +47,9 @@ static void skidbuzz_input_callback(InputEvent* input_event, void* context) {
                 switch (input_event->key) {
                     case InputKeyOk:
                         app->mode = SkidBuzzModeInputNumber; // Transition to input mode
-                        app->input_length = 0; // Reset input length
-                        app->user_input[0] = '\0'; // Clear previous input
+                        app->input_length = 1; // Reset input length to 1
+                        app->user_input[0] = '0'; // Initialize with a default value of '0'
+                        app->user_input[1] = '\0'; // Null-terminate the string
                         break;
                     case InputKeyBack:
                         app->running = false; // Exit the app
@@ -145,7 +146,8 @@ static void skidbuzz_render_callback(Canvas* canvas, void* context) {
         case SkidBuzzModeViewResult:
             canvas_draw_str(canvas, 10, 10, "Result:");
             canvas_draw_str(canvas, 10, 30, app->result + app->horizontal_scroll_offset);
-            canvas_draw_str(canvas, 10, 50, "OK: Back LEFT/RIGHT: Scroll");
+            canvas_draw_str(canvas, 10, 50, "OK: Back"); 
+            canvas_draw_str(canvas, 10, 60, "LEFT/RIGHT: Scroll");
             break;
 
         default:
